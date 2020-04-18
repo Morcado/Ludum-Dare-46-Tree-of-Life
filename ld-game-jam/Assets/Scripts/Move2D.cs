@@ -7,7 +7,6 @@ public class Move2D : MonoBehaviour
     // Start is called before the first frame update
     public float moveSpeed = 5f;
     public float jumpHeight = 10f;
-    public bool isGrounded = false;
     private SpriteRenderer spriteRend;
     private Animator animator;
     private Rigidbody2D player;
