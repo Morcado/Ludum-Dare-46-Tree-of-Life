@@ -36,16 +36,12 @@ public class Move2D : MonoBehaviour
         Vector3 movement = new Vector3(horizontalInput, 0f, 0f);
         
         transform.position += movement * Time.deltaTime * moveSpeed;
-        // var spriteRend = GetComponent<SpriteRenderer>();
 
-        // animator.SetBool("running", false);
         if (horizontalInput < 0) {
             spriteRend.flipX = true;
-            // animator.SetBool("running", true);
         }
         else if (horizontalInput > 0) {
             spriteRend.flipX = false;
-            // animator.SetBool("running", true);
         }
 
     }
@@ -68,13 +64,6 @@ public class Move2D : MonoBehaviour
             state = State.idle;
         }
         Debug.Log("state:" + (int)state);
-        // if(player.velocity.x > 0.1) {
-        //     // Se mueve a la derecha
-        // }
-
-        // else if (player.velocity.x < 0.1) {
-        //     // Se mueve a la izquierda
-        // }
     }
 
     public void Jump() {
@@ -88,5 +77,12 @@ public class Move2D : MonoBehaviour
 
     public void UpStairs() {
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == "Fertilizer") {
+            // Debug.Log("fertilizaer");
+            Destroy(collision.gameObject);
+        }
     }
 }
