@@ -6,7 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private bool facingLeft = false;
-    [SerializeField] private float moveSpeed = 2.5f;
+    [SerializeField] private float moveSpeed = 1f;
     private SpriteRenderer spriteRend;
 
 
@@ -25,11 +25,11 @@ public class EnemyMove : MonoBehaviour
     void Update() {
         Vector3 movement = new Vector3(1, 0f, 0f);
         if (facingLeft) {
-            movement.x = 1;
+            movement.x = 0.5f;
             spriteRend.flipX = true;
         }
         else {
-            movement.x = -1;
+            movement.x = -0.5f;
             spriteRend.flipX = false;
         }
         transform.position += movement * Time.deltaTime * moveSpeed;
