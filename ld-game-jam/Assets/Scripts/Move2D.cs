@@ -5,8 +5,9 @@ using UnityEngine;
 public class Move2D : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float moveSpeed = 5f;
-    public float jumpHeight = 10f;
+    [SerializeField] public float moveSpeed = 5f;
+    [SerializeField] public float jumpHeight = 10f;
+    
     private SpriteRenderer spriteRend;
     private Animator animator;
     private Rigidbody2D player;
@@ -20,15 +21,16 @@ public class Move2D : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
+        
     }
 
     // Update is called once per frame
     void Update() {
         Jump();
         Move();
-        //UpStairs();
         VelocityState();
         animator.SetInteger("state", (int)state);
+        
     }
 
     public void Move() {
@@ -73,10 +75,6 @@ public class Move2D : MonoBehaviour
             player.velocity = new Vector2(player.velocity.x, jumpHeight);
             state = State.jump;
         }
-    }
-
-    public void UpStairs() {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
