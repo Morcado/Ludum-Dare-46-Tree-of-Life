@@ -13,7 +13,7 @@ public class Move2D : MonoBehaviour
     private Rigidbody2D player;
     private Collider2D coll;
     [SerializeField] private LayerMask Foreground;
-    private enum State {idle, run, jump, fall}
+    private enum State {idle, run, jump, fall, melee, special}
     private State state = State.idle;
 
     void Start() {
@@ -65,7 +65,7 @@ public class Move2D : MonoBehaviour
         else {
             state = State.idle;
         }
-        Debug.Log("state:" + (int)state);
+        // Debug.Log("state:" + (int)state);
     }
 
     public void Jump() {

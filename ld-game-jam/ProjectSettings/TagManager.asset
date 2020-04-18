@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Fertilizer
   - WaterCan
+  - Seed
+  - Tree
+  - Skeleton
   layers:
   - Default
   - TransparentFX
