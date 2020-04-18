@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skeleton
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 32
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: b323cd1b54032374d8585b0982a710f8, type: 3}
+    - {fileID: 21300000, guid: 9c6cfccbe34ce9146a7ecbb51910b882, type: 3}
+    - {fileID: 21300000, guid: 3bbf35a1b847a0f4f88e9b63c414d72e, type: 3}
+    - {fileID: 21300000, guid: 76d43f60721809e44965ea3be1812d25, type: 3}
+    totalSpriteSurfaceArea: 2048
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 76d43f60721809e44965ea3be1812d25, type: 3}
+  - {fileID: 21300000, guid: 3bbf35a1b847a0f4f88e9b63c414d72e, type: 3}
+  - {fileID: 21300000, guid: b323cd1b54032374d8585b0982a710f8, type: 3}
+  - {fileID: 21300000, guid: 9c6cfccbe34ce9146a7ecbb51910b882, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Skeleton 3
+  - Skeleton 2
+  - Skeleton 0
+  - Skeleton 1
+  m_Tag: Skeleton
+  m_IsVariant: 0
