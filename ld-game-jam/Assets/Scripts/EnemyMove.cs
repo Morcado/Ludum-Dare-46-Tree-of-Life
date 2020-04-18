@@ -46,7 +46,9 @@ public class EnemyMove : MonoBehaviour
             movement.x = -0.5f;
             spriteRend.flipX = true;
         }
-        transform.position += movement * Time.deltaTime * moveSpeed;
+        if (state != State.idle){
+            transform.position += movement * Time.deltaTime * moveSpeed;
+        }
     }
 
     private void ZombieState() {
@@ -61,7 +63,10 @@ public class EnemyMove : MonoBehaviour
             state = State.walk;      
         }
         else {
-            state = State.idle;
+            if (transform.position.x < 0.30f || transform.position.x > -0.30f) {
+                state = State.idle;
+
+            }
         }
         
     }
