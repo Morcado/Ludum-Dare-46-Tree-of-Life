@@ -28,7 +28,7 @@ public class Move2D : MonoBehaviour
         Move();
         //UpStairs();
         VelocityState();
-        //animator.SetInteger("state", (int)state);
+        animator.SetInteger("state", (int)state);
     }
 
     public void Move() {
