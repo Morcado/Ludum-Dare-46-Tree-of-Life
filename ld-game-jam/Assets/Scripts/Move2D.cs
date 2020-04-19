@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move2D : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Modificable stuff for the player
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
     
@@ -13,15 +13,18 @@ public class Move2D : MonoBehaviour
     private Rigidbody2D player;
     private Collider2D coll;
     [SerializeField] private LayerMask Foreground;
-    private enum State {idle, run, jump, fall, melee, special}
+    private enum State {idle, run, jump, fall, melee, special}; // States of the player
     private State state = State.idle;
 
+    // Start is called before the first frame update
     void Start() {
+        // Get components of the player to later modify them.
         spriteRend = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         player = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         
+        // Ingnore collision between player and tree.
         Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());
     }
 
@@ -30,16 +33,21 @@ public class Move2D : MonoBehaviour
         Jump();
         Move();
         VelocityState();
+
+        // Changes animation of the player every time
         animator.SetInteger("state", (int)state);
         
     }
 
+    // Moving the player
     public void Move() {
+        // Gets the left or right action pressed
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector3 movement = new Vector3(horizontalInput, 0f, 0f);
-        
+        // Changes player position
         transform.position += movement * Time.deltaTime * moveSpeed;
 
+        // Flips the player sprite if it's moving to the left or right;
         if (horizontalInput < 0) {
             spriteRend.flipX = true;
         }
@@ -48,18 +56,23 @@ public class Move2D : MonoBehaviour
         }
 
     }
-
+    /* This controls the state of the player*/
     private void VelocityState() {
+        /* If player it's jumping then it changes to the falling state when
+        the velocity of player reaches 0 (highest point)*/
         if (state == State.jump) {
             if (player.velocity.y < 0.1f) {
                 state = State.fall;
             }
         }
+        /* Changes the state of falling to idle if it touches the layer foreground (the floor)*/
         else if (state == State.fall) {
             if (coll.IsTouchingLayers(Foreground)) {
                 state = State.idle;
             }
         }
+        /* If player velocity changes more than epsilon, it's sprite changes to running animation.
+        This is ignored when the player it's jumping or falling*/
         else if (Mathf.Abs(player.velocity.x) > Mathf.Epsilon) {
             state = State.run;
         }
@@ -69,10 +82,11 @@ public class Move2D : MonoBehaviour
         // Debug.Log("state:" + (int)state);
     }
 
+    /* This is called every time to check if the player is jumping. it checks on the jump button.*/
     public void Jump() {
         
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Foreground)){
-            //player.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse);
+            //player.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse); // another way?
             player.velocity = new Vector2(player.velocity.x, jumpHeight);
             state = State.jump;
         }
