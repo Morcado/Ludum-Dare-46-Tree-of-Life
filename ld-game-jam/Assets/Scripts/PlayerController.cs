@@ -29,12 +29,14 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<Collider2D>();
         
         // Ingnore collision between player and tree.
-        Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Bush").GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());       
     }
 
     // Update is called once per frame
     void Update() {
+        if (GameObject.FindWithTag("Bush") != null) {
+            Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Bush").GetComponent<Collider2D>());
+        }
         Jump();
         Move();
         VelocityState();
@@ -110,12 +112,16 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             pickUpSFX.Play();
         }
-        if (collision.tag == "WaterCan") {
+        else if (collision.tag == "WaterCan") {
             GameObject.FindWithTag("Tree").GetComponent<TreeController>().AddLife();
             Destroy(collision.gameObject);
             pickUpSFX.Play();
         }
-        if (collision.tag == "Seed") {
+        else if (collision.tag == "Energy") {
+            Destroy(collision.gameObject);
+            pickUpSFX.Play();
+        }
+        else if (collision.tag == "Seed") {
             switcher = !switcher;
             Destroy(collision.gameObject);
             GameObject.FindWithTag("Spawner").GetComponent<Spawner>().SpawnMinitrees(true);
