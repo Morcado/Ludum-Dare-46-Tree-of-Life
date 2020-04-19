@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TreeBehaviour : MonoBehaviour {
 
     [SerializeField] private int lifes = 15;
-    [SerializeField] private Text lifesText; // show number in GUI
+    [SerializeField] private Text lifesText = null; // show number in GUI
 
     // Start is called before the first frame update
     void Start() {
