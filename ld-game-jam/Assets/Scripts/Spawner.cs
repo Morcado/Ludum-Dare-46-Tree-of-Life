@@ -3,28 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    public GameObject myPrefab;
+    public GameObject bush;
+    public GameObject seed;
+    public GameObject watercan;
+    public GameObject fertilizer;
 
     // Start is called before the first frame update
     void Start() {
-        Instantiate(myPrefab, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
+        // level 1.
+
     }
 
-    void SpawnMinitrees(bool left) {
+    public void SpawnMinitrees(bool left) {
         if (left) {
-            Instantiate(myPrefab, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
+            Instantiate(bush, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
         }
         else {
-            Instantiate(myPrefab, new Vector3(-0.855f, 1.505f, 0), Quaternion.identity);
+            Instantiate(bush, new Vector3(-0.855f, 1.505f, 0), Quaternion.identity);
         }
     }
 
     void SpawnLV1() {
+        if (GameObject.FindWithTag("Bush") != null) {
 
+        }
+        if (GameObject.FindWithTag("WaterCan") != null) {
+
+        }
+        if (GameObject.FindWithTag("Fertilizer") != null) {
+
+        }
+        if (GameObject.FindWithTag("Energy") != null) {
+            
+        }
     }
 
     // Update is called once per frame
     void Update(){
-        
+        SpawnLV1();
     }
 }

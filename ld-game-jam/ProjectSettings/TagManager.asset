@@ -12,6 +12,8 @@ TagManager:
   - Zombie
   - Ground
   - Bush
+  - Spawner
+  - Energy
   layers:
   - Default
   - TransparentFX

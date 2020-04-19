@@ -32,4 +32,8 @@ public class TreeController : MonoBehaviour {
     public void AddLife() {
         lifes += 5;
     }
+
+    public void GrowTree() {
+        
+    }
 }

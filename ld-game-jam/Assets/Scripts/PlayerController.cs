@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // Modificable stuff for the player
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
+    private bool switcher = true;
 
     public AudioSource jumpSFX;
     public AudioSource pickUpSFX;
@@ -115,7 +116,9 @@ public class PlayerController : MonoBehaviour
             pickUpSFX.Play();
         }
         if (collision.tag == "Seed") {
+            switcher = !switcher;
             Destroy(collision.gameObject);
+            GameObject.FindWithTag("Spawner").GetComponent<Spawner>().SpawnMinitrees(true);
             pickUpSFX.Play();
         }
     }

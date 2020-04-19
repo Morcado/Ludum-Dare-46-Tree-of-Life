@@ -50,7 +50,7 @@ public class ZombieController : MonoBehaviour
     // Controls the zombie and the skeleton movement (states 0 and 1)
     private void MoveAction() {
         // zombie speed factor, and skeleton speed factor
-        moveSpeedFactor = gameObject.tag == "Zombie" ? 0.5f : 0.3f;
+        moveSpeedFactor = 0.5f;
 
         Vector3 movement = new Vector3(1, 0f, 0f);
         // changes the speed to move the sprite to the left or to the right depending
