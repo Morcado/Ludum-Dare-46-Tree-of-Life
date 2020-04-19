@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TreeBehaviour : MonoBehaviour {
+public class TreeController : MonoBehaviour {
 
     [SerializeField] private int lifes = 15;
     [SerializeField] private Text lifesText = null; // show number in GUI

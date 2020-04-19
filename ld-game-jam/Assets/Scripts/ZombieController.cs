@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class ZombieController : MonoBehaviour
 {
     // Modificable fields for enemies
     [SerializeField] private bool facingLeft = false;
@@ -72,7 +72,7 @@ public class EnemyMove : MonoBehaviour
     /* Function called when the animation of attacking it's at half, then it calls
      the tree function to reduce it's life by one. This can be changed in the animation event*/
     public void AttackAction() {
-        GameObject.FindWithTag("Tree").GetComponent<TreeBehaviour>().ReduceLife();
+        GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
 
     }
 

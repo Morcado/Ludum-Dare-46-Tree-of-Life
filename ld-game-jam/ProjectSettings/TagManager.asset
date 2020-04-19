@@ -11,6 +11,7 @@ TagManager:
   - Skeleton
   - Zombie
   - Ground
+  - Bush
   layers:
   - Default
   - TransparentFX

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move2D : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     // Modificable stuff for the player
     [SerializeField] public float moveSpeed = 5f;
@@ -29,6 +29,7 @@ public class Move2D : MonoBehaviour
         
         // Ingnore collision between player and tree.
         Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Bush").GetComponent<Collider2D>());
     }
 
     // Update is called once per frame
@@ -109,7 +110,7 @@ public class Move2D : MonoBehaviour
             pickUpSFX.Play();
         }
         if (collision.tag == "WaterCan") {
-            GameObject.FindWithTag("Tree").GetComponent<TreeBehaviour>().AddLife();
+            GameObject.FindWithTag("Tree").GetComponent<TreeController>().AddLife();
             Destroy(collision.gameObject);
             pickUpSFX.Play();
         }
