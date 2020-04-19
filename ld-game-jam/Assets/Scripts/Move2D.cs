@@ -7,7 +7,9 @@ public class Move2D : MonoBehaviour
     // Modificable stuff for the player
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
-    
+
+    public AudioSource jumpSound;
+
     private SpriteRenderer spriteRend;
     private Animator animator;
     private Rigidbody2D player;
@@ -83,12 +85,15 @@ public class Move2D : MonoBehaviour
     }
 
     /* This is called every time to check if the player is jumping. it checks on the jump button.*/
-    public void Jump() {
+    public void Jump()
+    {
         
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Foreground)){
             //player.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse); // another way?
             player.velocity = new Vector2(player.velocity.x, jumpHeight);
             state = State.jump;
+
+            jumpSound.Play();
         }
     }
 
