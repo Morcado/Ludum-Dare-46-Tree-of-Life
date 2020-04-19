@@ -11,7 +11,7 @@ public class EnemyMove : MonoBehaviour
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
     private Animator animator;
-    private enum State {idle, walk, attack, death, fall}
+    private enum State {idle, walk, attack, death}
     private State state = State.idle;
 
     void Start() {
@@ -31,15 +31,15 @@ public class EnemyMove : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (state != State.attack) {
+        if (state != State.attack && state != State.death) {
             MoveAction();
         }
 
         ZombieState();
         animator.SetInteger("state", (int)state);
-
     }
 
+    // Controls the zombie and the skeleton movement
     private void MoveAction() {
         if (gameObject.tag == "Zombie") {
             moveSpeedFactor = 0.5f;
@@ -70,10 +70,10 @@ public class EnemyMove : MonoBehaviour
         if (other.gameObject.tag == "Tree") {
             state = State.attack;
         }
-        if (other.gameObject.tag == "Player") {
+        else if (other.gameObject.tag == "Player") {
             state = State.death;
         }
-        if (other.gameObject.tag == "Ground") {
+        else if (other.gameObject.tag == "Ground") {
             if (transform.position.x < 0) {
                 facingLeft = true;
             }
@@ -88,7 +88,8 @@ public class EnemyMove : MonoBehaviour
     }
 
     private void ZombieState() {
-        if (state == State.attack) {
+        if (state == State.death) {
+            
         }
         else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      
