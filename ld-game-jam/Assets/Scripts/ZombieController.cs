@@ -25,21 +25,16 @@ public class ZombieController : MonoBehaviour
         /* this defines if the enemy starts moving towards left or towards right.
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
-        if (transform.position.x < 0) {
-            facingLeft = true;
-        }
-        else {
-            facingLeft = false;
-        }
+        facingLeft = transform.position.x < 0 ? true : false;
         
     }
 
     // Update is called once per frame
     void Update() {
         // Enemies will only move or idle if they are not attacking or dying
-        if (state != State.attack && state != State.death) {
+        if (state != State.attack && state != State.death)
             MoveAction();
-        }
+        
 
         // This checks the zombie state and do some stuff (wip)
         ZombieState();
@@ -49,6 +44,7 @@ public class ZombieController : MonoBehaviour
 
     // Controls the zombie and the skeleton movement (states 0 and 1)
     private void MoveAction() {
+        Debug.Log("moving? : " + (int)state);
         // zombie speed factor, and skeleton speed factor
         moveSpeedFactor = 0.5f;
 
@@ -78,6 +74,7 @@ public class ZombieController : MonoBehaviour
 
     /* Collision of the enemy with different tiles */
     private void OnCollisionEnter2D(Collision2D other) {
+        Debug.Log("zombi colide: ");
         if (other.gameObject.tag == "Tree") {
             state = State.attack; // switches to atack state
         }
@@ -87,12 +84,8 @@ public class ZombieController : MonoBehaviour
         else if (other.gameObject.tag == "Ground") {
             /* Checks when the enemy falls off a platform. Theenemy changes it's
             direction if the plant it's in the oposite direction */
-            if (transform.position.x < 0) {
-                facingLeft = true;
-            }
-            else {
-                facingLeft = false;
-            }
+            
+            facingLeft = transform.position.x < 0 ? true : false;
         }
     }
 
@@ -103,11 +96,10 @@ public class ZombieController : MonoBehaviour
 
     /* Controls the state of the zombie WIP*/
     private void ZombieState() {
-        if (state == State.death) {
-            
-        }
-        else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
+
+        if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      
+            Debug.Log("walking");
         }
         
     }
