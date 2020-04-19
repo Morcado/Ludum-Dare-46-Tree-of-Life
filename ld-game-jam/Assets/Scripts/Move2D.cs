@@ -8,7 +8,8 @@ public class Move2D : MonoBehaviour
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
 
-    public AudioSource jumpSound;
+    public AudioSource jumpSFX;
+    public AudioSource pickUpSFX;
 
     private SpriteRenderer spriteRend;
     private Animator animator;
@@ -93,7 +94,7 @@ public class Move2D : MonoBehaviour
             player.velocity = new Vector2(player.velocity.x, jumpHeight);
             state = State.jump;
 
-            jumpSound.Play();
+            jumpSFX.Play();
         }
     }
 
@@ -105,13 +106,16 @@ public class Move2D : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Fertilizer") {
             Destroy(collision.gameObject);
+            pickUpSFX.Play();
         }
         if (collision.tag == "WaterCan") {
             GameObject.FindWithTag("Tree").GetComponent<TreeBehaviour>().AddLife();
             Destroy(collision.gameObject);
+            pickUpSFX.Play();
         }
         if (collision.tag == "Seed") {
             Destroy(collision.gameObject);
+            pickUpSFX.Play();
         }
     }
 }
