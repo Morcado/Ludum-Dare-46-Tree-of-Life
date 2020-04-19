@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     // Start is called before the first frame update
-    private bool facingLeft = false;
+    [SerializeField] private bool facingLeft = false;
     [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeedFactor = 0.5f;
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
     private Animator animator;
-    private enum State {idle, walk, attack, death}
+    private enum State {idle, walk, attack, death, fall}
     private State state = State.idle;
 
     void Start() {
@@ -30,20 +31,30 @@ public class EnemyMove : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        Move();
+        if (state != State.attack) {
+            MoveAction();
+        }
+
         ZombieState();
         animator.SetInteger("state", (int)state);
 
     }
 
-    private void Move() {
+    private void MoveAction() {
+        if (gameObject.tag == "Zombie") {
+            moveSpeedFactor = 0.5f;
+        }
+        else {
+            moveSpeedFactor = 0.3f;
+        }
+
         Vector3 movement = new Vector3(1, 0f, 0f);
         if (facingLeft) {
-            movement.x = 0.5f;
+            movement.x = moveSpeedFactor;
             spriteRend.flipX = false;
         }
         else {
-            movement.x = -0.5f;
+            movement.x = -moveSpeedFactor;
             spriteRend.flipX = true;
         }
         if (state != State.idle){
@@ -51,22 +62,36 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    private void ZombieState() {
-        // if (state == State.attack) {
+    public void AttackAction() {
+        GameObject.FindWithTag("Tree").GetComponent<TreeBehaviour>().ReduceLife();
 
-        // }
-        // else if (state == State.death) {
-
-        // }
-        // else 
-        if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon) {
-            state = State.walk;      
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.tag == "Tree") {
+            state = State.attack;
         }
-        else {
-            if (transform.position.x < 0.30f || transform.position.x > -0.30f) {
-                state = State.idle;
-
+        if (other.gameObject.tag == "Player") {
+            state = State.death;
+        }
+        if (other.gameObject.tag == "Ground") {
+            if (transform.position.x < 0) {
+                facingLeft = true;
             }
+            else {
+                facingLeft = false;
+            }
+        }
+    }
+
+    public void RemoveEnemy() {
+        Destroy(gameObject);
+    }
+
+    private void ZombieState() {
+        if (state == State.attack) {
+        }
+        else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
+            state = State.walk;      
         }
         
     }

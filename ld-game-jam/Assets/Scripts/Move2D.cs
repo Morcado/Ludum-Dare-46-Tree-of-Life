@@ -22,6 +22,7 @@ public class Move2D : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         
+        Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());
     }
 
     // Update is called once per frame
@@ -77,9 +78,20 @@ public class Move2D : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Fertilizer") {
-            // Debug.Log("fertilizaer");
+            Destroy(collision.gameObject);
+        }
+        if (collision.tag == "WaterCan") {
+            GameObject.FindWithTag("Tree").GetComponent<TreeBehaviour>().AddLife();
+            Destroy(collision.gameObject);
+        }
+        if (collision.tag == "Seed") {
             Destroy(collision.gameObject);
         }
     }

@@ -9,6 +9,8 @@ TagManager:
   - Seed
   - Tree
   - Skeleton
+  - Zombie
+  - Ground
   layers:
   - Default
   - TransparentFX
