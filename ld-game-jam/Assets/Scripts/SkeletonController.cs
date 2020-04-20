@@ -25,13 +25,7 @@ public class SkeletonController : MonoBehaviour
         /* this defines if the enemy starts moving towards left or towards right.
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
-        if (transform.position.x < 0) {
-            facingLeft = true;
-        }
-        else {
-            facingLeft = false;
-        }
-        
+        facingLeft = transform.position.x < 0 ? true : false;
     }
 
     // Update is called once per frame

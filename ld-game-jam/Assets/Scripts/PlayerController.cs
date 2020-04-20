@@ -78,7 +78,6 @@ public class PlayerController : MonoBehaviour
             else {
                 Instantiate(beam, new Vector3(transform.position.x + 3, transform.position.y, 0), Quaternion.identity);
             }
-            Debug.Log("firing");
 
         }
     }

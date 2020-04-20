@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    [SerializeField] private GameObject bush;
+    [SerializeField] private GameObject bush = null;
     [SerializeField] private GameObject seed;
     [SerializeField] private GameObject watercan;
     [SerializeField] private GameObject fertilizer;
