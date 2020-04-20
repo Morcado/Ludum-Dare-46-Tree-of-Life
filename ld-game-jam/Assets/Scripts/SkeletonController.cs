@@ -102,6 +102,7 @@ public class SkeletonController : MonoBehaviour
     /* Collision of the enemy with different tiles */
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag == "Tree") {
+
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
