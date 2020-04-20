@@ -166,3 +166,4 @@ MonoBehaviour:
   facingLeft: 0
   moveSpeed: 1
   moveSpeedFactor: 0.3
+  meleAtackSFX: {fileID: 0}

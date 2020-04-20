@@ -93,7 +93,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886420276506551548}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2435bc47357ffb444b30570f1c15e36a, type: 2}
   m_CullingMode: 0
@@ -142,7 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f206cc85d064b51418ec7cd511a45be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifes: 30
+  hp: 30
+  fertilizer: 050000000a0000000f000000
   lifesText: {fileID: 0}
 --- !u!50 &1529827640
 Rigidbody2D:
@@ -152,7 +153,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886420276506551548}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

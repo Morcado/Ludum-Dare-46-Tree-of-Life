@@ -428,33 +428,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100282692}
   m_CullTransparentMesh: 0
---- !u!1 &111585121 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2886420276506551548, guid: b0d12e4c100ce9b4cb8689b1941b9689,
-    type: 3}
-  m_PrefabInstance: {fileID: 667162523}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &111585122
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111585121}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &356271563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,11 +1017,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 2886420276506551549, guid: b0d12e4c100ce9b4cb8689b1941b9689,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2886420276506551551, guid: b0d12e4c100ce9b4cb8689b1941b9689,
         type: 3}
@@ -5689,7 +5657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6195308829970290359, guid: 4ded2d6afdfb49848b94f04ee12513ec,
         type: 3}
-      propertyPath: jumpSound
+      propertyPath: jumpSFX
       value: 
       objectReference: {fileID: 1046734789}
     - target: {fileID: 6195308829970290359, guid: 4ded2d6afdfb49848b94f04ee12513ec,
@@ -5697,17 +5665,6 @@ PrefabInstance:
       propertyPath: pickUpSFX
       value: 
       objectReference: {fileID: 807497160}
-    - target: {fileID: 6195308829970290359, guid: 4ded2d6afdfb49848b94f04ee12513ec,
-        type: 3}
-      propertyPath: jumpSFX
-      value: 
-      objectReference: {fileID: 1046734789}
-    - target: {fileID: 6195308829970290359, guid: 4ded2d6afdfb49848b94f04ee12513ec,
-        type: 3}
-      propertyPath: beam
-      value: 
-      objectReference: {fileID: 3991682072126239732, guid: 874bd4c0f3e04de4cae3a3dd73380165,
-        type: 3}
     - target: {fileID: 6195308829970290359, guid: 4ded2d6afdfb49848b94f04ee12513ec,
         type: 3}
       propertyPath: beamSFX

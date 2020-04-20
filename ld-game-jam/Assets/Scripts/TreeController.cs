@@ -27,7 +27,7 @@ public class TreeController : MonoBehaviour {
     void Update() {
         lifesText.text = hp.ToString(); //updates the life in GUI
         animator.SetInteger("state", (int)state);
-        animator.SetInteger("stage", (int)state);
+        animator.SetInteger("stage", (int)stage);
         Debug.Log("state: " + (int)state);
         Debug.Log("stage: " + (int)stage);
 
