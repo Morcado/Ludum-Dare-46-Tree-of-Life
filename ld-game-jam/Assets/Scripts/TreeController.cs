@@ -5,8 +5,16 @@ using UnityEngine.UI;
 
 public class TreeController : MonoBehaviour {
 
-    [SerializeField] private int lifes = 15;
+    [SerializeField] private int hp = 30;
+    [SerializeField] private int[] fertilizer = {5, 10, 15};
+    
     [SerializeField] private Text lifesText = null; // show number in GUI
+
+    private enum Stage {stage1, stage2, stage3};
+    private enum State {normal, damaged, death, hit};
+
+    private Stage stage = Stage.stage1;
+    private State state = State.normal;
 
     // Start is called before the first frame update
     void Start() {
@@ -16,21 +24,21 @@ public class TreeController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        lifesText.text = lifes.ToString(); //updates the life in GUI
+        lifesText.text = hp.ToString(); //updates the life in GUI
     }
 
     // This is called every time the zombie animation it's in the middle. It
     // reduces the tree life by one. This can be changed later in game to increase difficulty
     public void ReduceLife() {
-        if (lifes > 0) {
-            lifes--;
+        if (hp > 0) {
+            hp--;
         }
     }
 
     /* Called after the player picks up a watering can. Add 5 to life- This can be changed 
     later in game increase difficulty*/
     public void AddLife() {
-        lifes += 5;
+        hp += 5;
     }
 
     public void GrowTree() {
