@@ -44,7 +44,6 @@ public class ZombieController : MonoBehaviour
 
     // Controls the zombie and the skeleton movement (states 0 and 1)
     private void MoveAction() {
-        Debug.Log("moving? : " + (int)state);
         // zombie speed factor, and skeleton speed factor
         moveSpeedFactor = 0.5f;
 
@@ -74,7 +73,6 @@ public class ZombieController : MonoBehaviour
 
     /* Collision of the enemy with different tiles */
     private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log("zombi colide: ");
         if (other.gameObject.tag == "Tree") {
             state = State.attack; // switches to atack state
         }
@@ -99,7 +97,6 @@ public class ZombieController : MonoBehaviour
 
         if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      
-            Debug.Log("walking");
         }
         
     }

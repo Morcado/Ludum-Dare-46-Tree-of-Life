@@ -14,6 +14,8 @@ TagManager:
   - Bush
   - Spawner
   - Energy
+  - Fire
+  - Fireball
   layers:
   - Default
   - TransparentFX
