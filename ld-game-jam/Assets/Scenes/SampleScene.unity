@@ -6550,6 +6550,11 @@ PrefabInstance:
       propertyPath: lifesText
       value: 
       objectReference: {fileID: 911044775}
+    - target: {fileID: 2886420276506551489, guid: b0d12e4c100ce9b4cb8689b1941b9689,
+        type: 3}
+      propertyPath: hp
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2886420276506551548, guid: b0d12e4c100ce9b4cb8689b1941b9689,
         type: 3}
       propertyPath: m_Name

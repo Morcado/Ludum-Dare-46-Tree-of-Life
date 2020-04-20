@@ -28,18 +28,16 @@ public class TreeController : MonoBehaviour {
         lifesText.text = hp.ToString(); //updates the life in GUI
         animator.SetInteger("state", (int)state);
         animator.SetInteger("stage", (int)stage);
-        Debug.Log("state: " + (int)state);
-        Debug.Log("stage: " + (int)stage);
 
         if (state != State.hit){
         
             if (hp >= 15) {
                 state = State.normal;
-                Debug.Log("normal");
+   
             }
             else {
                 state = State.damaged;
-                Debug.Log("damaged");
+        
             }
         }
     }
@@ -105,10 +103,12 @@ public class TreeController : MonoBehaviour {
     }
 
     private void BackToNormal() {
+        Debug.Log("aatacking");
         state = State.normal;
     }
 
     private void BackToDamaged() {
+        Debug.Log("aatackin2");
         state = State.damaged;
 
     }

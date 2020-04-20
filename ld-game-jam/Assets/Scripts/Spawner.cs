@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private GameObject watercan;
     [SerializeField] private GameObject fertilizer;
     [SerializeField] private GameObject energy;
+    private float timeLeft = 3.0f;
     private List<Vector2> puntos = new List<Vector2>();
 
     // Start is called before the first frame update
@@ -43,9 +44,12 @@ public class Spawner : MonoBehaviour {
         }
 
         if (GameObject.FindWithTag("Fertilizer") == null) {
-            chose = Mathf.RoundToInt(Random.Range(0f, 21f));
+            timeLeft -= Time.deltaTime;
+            if(timeLeft < 0) {
+                chose = Mathf.RoundToInt(Random.Range(0f, 21f));
 
-            Instantiate(fertilizer, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+                Instantiate(fertilizer, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            }
         }
         if (GameObject.FindWithTag("Seed") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 21f));
