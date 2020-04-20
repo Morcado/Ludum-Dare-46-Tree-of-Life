@@ -93,7 +93,7 @@ public class ZombieController : MonoBehaviour
     /* Function called when the animation of attacking it's at half, then it calls
      the tree function to reduce it's life by one. This can be changed in the animation event*/
     public void AttackAction() {
-        GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
+        GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife(0);
 
     }
 

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float jumpHeight = 10f;
     private bool switcher = true;
     private bool facingLeft = false;
+    private int numFertilizer = 0;
 
     [SerializeField] private AudioSource jumpSFX;
     [SerializeField] private AudioSource pickUpSFX;
@@ -47,7 +48,8 @@ public class PlayerController : MonoBehaviour
 
         // Changes animation of the player every time
         animator.SetInteger("state", (int)state);
-        
+        Debug.Log("fertilizer: " + numFertilizer);
+
     }
 
     // Moving the player
@@ -128,6 +130,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Fertilizer") {
             Destroy(collision.gameObject);
+            numFertilizer++;
+            GameObject.FindWithTag("Tree").GetComponent<TreeController>().GrowTree(numFertilizer);
             pickUpSFX.Play();
         }
         else if (collision.tag == "WaterCan") {

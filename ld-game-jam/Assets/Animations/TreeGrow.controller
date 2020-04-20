@@ -287,7 +287,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreenTree
+  m_Name: Norm1 0
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -968,22 +968,22 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1866646962010208921}
-    m_Position: {x: 660, y: 190, z: 0}
+    m_Position: {x: 680, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7087720636180828040}
-    m_Position: {x: 660, y: 70, z: 0}
+    m_Position: {x: 680, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5567144390762301553}
-    m_Position: {x: 660, y: -60, z: 0}
+    m_Position: {x: 680, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2382159571713585371}
-    m_Position: {x: 0, y: -90, z: 0}
+    m_Position: {x: -20, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5099231336233270631}
-    m_Position: {x: 0, y: 50, z: 0}
+    m_Position: {x: -20, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1471416686080458953}
-    m_Position: {x: 0, y: 190, z: 0}
+    m_Position: {x: -20, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2861825849495127213}
     m_Position: {x: 250, y: -130, z: 0}
@@ -1008,7 +1008,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -90, y: 430, z: 0}
-  m_EntryPosition: {x: 270, y: 280, z: 0}
+  m_EntryPosition: {x: 270, y: 200, z: 0}
   m_ExitPosition: {x: 1310, y: 0, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -2646417523596461422}
@@ -1222,6 +1222,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 6
     m_ConditionEvent: state
     m_EventTreshold: 1
+  - m_ConditionMode: 6
+    m_ConditionEvent: stage
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1751061415957730144}
   m_Solo: 0
