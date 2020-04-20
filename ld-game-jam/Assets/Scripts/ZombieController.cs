@@ -9,6 +9,9 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private bool facingLeft = false;
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float moveSpeedFactor = 0.5f;
+
+    [SerializeField] private AudioSource meleAtackSFX;
+
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
     private Collider2D coll;
@@ -95,6 +98,7 @@ public class ZombieController : MonoBehaviour
     public void AttackAction() {
         GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife(0);
 
+        meleAtackSFX.Play();
     }
 
     /* Collision of the enemy with different tiles */

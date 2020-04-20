@@ -8,6 +8,9 @@ public class FireSpiritController : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float moveSpeedFactor = 0.5f;
     [SerializeField] private GameObject fireball;
+
+    [SerializeField] private AudioSource fireAtackSFX;
+
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
     private Animator animator;
@@ -67,9 +70,12 @@ public class FireSpiritController : MonoBehaviour
     
         if (facingLeft) {
             Instantiate(fireball, new Vector3(transform.position.x + 1, transform.position.y, 0), Quaternion.identity);
+
+            fireAtackSFX.Play();
         }
         else {
             Instantiate(fireball, new Vector3(transform.position.x - 1, transform.position.y, 0), Quaternion.identity);
+            fireAtackSFX.Play();
         }
     
     }

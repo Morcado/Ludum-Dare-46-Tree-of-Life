@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource jumpSFX;
     [SerializeField] private AudioSource pickUpSFX;
+    [SerializeField] private AudioSource beamSFX;
 
     [SerializeField] private GameObject beam;
 
@@ -76,9 +77,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire1")){
             if (facingLeft) {
                 Instantiate(beam, new Vector3(transform.position.x - 3, transform.position.y, 0), Quaternion.identity);
+
+                beamSFX.Play();
             }
             else {
                 Instantiate(beam, new Vector3(transform.position.x + 3, transform.position.y, 0), Quaternion.identity);
+
+                beamSFX.Play();
             }
 
         }
