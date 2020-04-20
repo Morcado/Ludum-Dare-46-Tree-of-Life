@@ -165,4 +165,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingLeft: 0
   moveSpeed: 1
-  moveSpeedFactor: 0.5
+  moveSpeedFactor: 0.3

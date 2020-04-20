@@ -101,7 +101,7 @@ public class SkeletonController : MonoBehaviour
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
-            Destroy(gameObject);
+            
             state = State.death; // switches to death state
         }
         else if (other.gameObject.tag == "Ground") {
@@ -120,8 +120,7 @@ public class SkeletonController : MonoBehaviour
     /* Controls the state of the zombie WIP*/
     private void SkeletonState() {
         if (state == State.walk) {
-
-
+            
         }
         else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      
