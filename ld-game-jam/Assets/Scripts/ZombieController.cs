@@ -77,6 +77,7 @@ public class ZombieController : MonoBehaviour
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
+
             state = State.death; // switches to death state
         }
         else if (other.gameObject.tag == "Ground") {
@@ -84,6 +85,13 @@ public class ZombieController : MonoBehaviour
             direction if the plant it's in the oposite direction */
             
             facingLeft = transform.position.x < 0 ? true : false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Beam") {
+
+            state = State.death; // switches to death state
         }
     }
 

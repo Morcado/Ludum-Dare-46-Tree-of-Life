@@ -8,9 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
     private bool switcher = true;
+    private bool facingLeft = false;
 
-    public AudioSource jumpSFX;
-    public AudioSource pickUpSFX;
+    [SerializeField] private AudioSource jumpSFX;
+    [SerializeField] private AudioSource pickUpSFX;
+
+    [SerializeField] private GameObject beam;
 
     private SpriteRenderer spriteRend;
     private Animator animator;
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
         }
         Jump();
         Move();
+        Shoot();
         VelocityState();
 
         // Changes animation of the player every time
@@ -56,12 +60,27 @@ public class PlayerController : MonoBehaviour
 
         // Flips the player sprite if it's moving to the left or right;
         if (horizontalInput < 0) {
+            facingLeft = true;
             spriteRend.flipX = true;
         }
         else if (horizontalInput > 0) {
+            facingLeft = false;
             spriteRend.flipX = false;
         }
 
+    }
+
+    public void Shoot(){
+        if (Input.GetButtonDown("Fire1")){
+            if (facingLeft) {
+                Instantiate(beam, new Vector3(transform.position.x - 3, transform.position.y, 0), Quaternion.identity);
+            }
+            else {
+                Instantiate(beam, new Vector3(transform.position.x + 3, transform.position.y, 0), Quaternion.identity);
+            }
+            Debug.Log("firing");
+
+        }
     }
     /* This controls the state of the player*/
     private void VelocityState() {

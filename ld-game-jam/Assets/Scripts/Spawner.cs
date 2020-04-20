@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour {
-    public GameObject bush;
-    public GameObject seed;
-    public GameObject watercan;
-    public GameObject fertilizer;
-    public GameObject energy;
+    [SerializeField] private GameObject bush;
+    [SerializeField] private GameObject seed;
+    [SerializeField] private GameObject watercan;
+    [SerializeField] private GameObject fertilizer;
+    [SerializeField] private GameObject energy;
     private List<Vector2> puntos = new List<Vector2>();
 
     // Start is called before the first frame update

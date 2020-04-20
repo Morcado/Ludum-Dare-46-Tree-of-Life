@@ -16,6 +16,7 @@ TagManager:
   - Energy
   - Fire
   - Fireball
+  - Beam
   layers:
   - Default
   - TransparentFX
