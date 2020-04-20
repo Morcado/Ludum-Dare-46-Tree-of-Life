@@ -33,13 +33,29 @@ public class FireballController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Move();
-
+        if (transform.position.y < 0) {
+            Destroy(gameObject);
+        }
     }
 
     void Move() {
-        Debug.Log(xrate);
-        Debug.Log(yrate);
         //if (transform.position.x < tree.transform.position.x && transform.position.y < tree.transform.position.y)
-        transform.position = new Vector3(transform.position.x + 0.01f, transform.position.y - 0.02f, transform.position.z);
+        if(facingLeft)
+            transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y - 0.075f, transform.position.z);
+        else
+            transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y - 0.075f, transform.position.z);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("fire triger");
+        // if (other.gameObject.tag == "Tree") {
+        //     GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
+        // }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        Debug.Log("fire cllision");
+        // GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
+
     }
 }

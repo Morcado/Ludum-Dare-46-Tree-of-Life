@@ -36,4 +36,21 @@ public class TreeController : MonoBehaviour {
     public void GrowTree() {
         
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("hit trigger");
+        if (other.gameObject.tag == "Fireball") {
+            ReduceLife();
+            // GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        Debug.Log("hit collision");
+        if (other.gameObject.tag == "Fireball") {
+            ReduceLife();
+        }
+        // GameObject.FindWithTag("Fireball").GetComponent<TreeController>().ReduceLife();
+
+    }
 }

@@ -26,7 +26,9 @@ public class ZombieController : MonoBehaviour
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
-        
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindWithTag("Fire").GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindWithTag("Fireball").GetComponent<Collider2D>());      
+
     }
 
     // Update is called once per frame
@@ -83,7 +85,7 @@ public class ZombieController : MonoBehaviour
         else if (other.gameObject.tag == "Ground") {
             /* Checks when the enemy falls off a platform. Theenemy changes it's
             direction if the plant it's in the oposite direction */
-            
+            state = State.walk;
             facingLeft = transform.position.x < 0 ? true : false;
         }
     }

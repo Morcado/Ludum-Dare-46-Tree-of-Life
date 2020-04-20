@@ -11,7 +11,6 @@ public class FireSpiritController : MonoBehaviour
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
     private Animator animator;
-    /* Four different styles for enemies. Maybe add a falling state*/
     private enum State {idle, attack, death};
     private State state = State.idle;
     private float timeLeft = 5.0f;
@@ -34,7 +33,6 @@ public class FireSpiritController : MonoBehaviour
         if (state != State.attack)
             Shoot();
         animator.SetInteger("state", (int)state);
-        Debug.Log((int)state);
     }
 
     public void Shoot() {
@@ -54,6 +52,5 @@ public class FireSpiritController : MonoBehaviour
     public void ReturnIdle() {
         timeLeft = 2.0f;
         state = State.idle;
-        Debug.Log("idle");
     }
 }
