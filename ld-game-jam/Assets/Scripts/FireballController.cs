@@ -47,14 +47,12 @@ public class FireballController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("fire triger");
         // if (other.gameObject.tag == "Tree") {
         //     GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
         // }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log("fire cllision");
         // GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
 
     }

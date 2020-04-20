@@ -10,15 +10,17 @@ public class SkeletonController : MonoBehaviour
     [SerializeField] private float moveSpeedFactor = 0.5f;
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
+    private Collider2D coll;
     private Animator animator;
     /* Four different styles for enemies. Maybe add a falling state*/
-    private enum State {idle, walk, attack, death};
+    private enum State {idle, walk, fall, attack, death};
     private State state = State.idle;
     // Start is called before the first frame update
     void Start() {
         // Get the rigidbody, animator and sprite renderer of the current enemy.
         // this is used in the methods below 
         enemy = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
 
@@ -26,10 +28,13 @@ public class SkeletonController : MonoBehaviour
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
+
+
     }
 
     // Update is called once per frame
     void Update() {
+        IgnoreCollisions();
         // Enemies will only move or idle if they are not attacking or dying
         if (state != State.attack && state != State.death) {
             MoveAction();
@@ -41,10 +46,30 @@ public class SkeletonController : MonoBehaviour
         animator.SetInteger("state", (int)state);
     }
 
+    private void IgnoreCollisions() {
+        GameObject test;
+
+        test = GameObject.FindWithTag("Fire");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());
+            
+        test = GameObject.FindWithTag("Fireball");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());  
+
+        test = GameObject.FindWithTag("Skeleton");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());      
+
+        test = GameObject.FindWithTag("Zombie");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());     
+
+    }
     // Controls the zombie and the skeleton movement (states 0 and 1)
     private void MoveAction() {
         // zombie speed factor, and skeleton speed factor
-        moveSpeedFactor = 0.3f;
+        moveSpeedFactor = 0.5f;
 
         Vector3 movement = new Vector3(1, 0f, 0f);
         // changes the speed to move the sprite to the left or to the right depending
@@ -82,12 +107,8 @@ public class SkeletonController : MonoBehaviour
         else if (other.gameObject.tag == "Ground") {
             /* Checks when the enemy falls off a platform. Theenemy changes it's
             direction if the plant it's in the oposite direction */
-            if (transform.position.x < 0) {
-                facingLeft = true;
-            }
-            else {
-                facingLeft = false;
-            }
+            state = State.walk;
+            facingLeft = transform.position.x < 0 ? true : false;
         }
     }
 
@@ -98,8 +119,9 @@ public class SkeletonController : MonoBehaviour
 
     /* Controls the state of the zombie WIP*/
     private void SkeletonState() {
-        if (state == State.death) {
-            
+        if (state == State.walk) {
+
+
         }
         else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      

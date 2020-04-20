@@ -38,7 +38,6 @@ public class TreeController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("hit trigger");
         if (other.gameObject.tag == "Fireball") {
             ReduceLife();
             // GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
