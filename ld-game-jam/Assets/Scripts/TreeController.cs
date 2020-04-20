@@ -35,9 +35,11 @@ public class TreeController : MonoBehaviour {
         
             if (hp >= 15) {
                 state = State.normal;
+                Debug.Log("normal");
             }
             else {
                 state = State.damaged;
+                Debug.Log("damaged");
             }
         }
     }
