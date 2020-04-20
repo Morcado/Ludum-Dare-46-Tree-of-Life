@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class ZombieController : MonoBehaviour
     [SerializeField] private float moveSpeedFactor = 0.5f;
     private SpriteRenderer spriteRend;
     private Rigidbody2D enemy;
+    private Collider2D coll;
     private Animator animator;
     /* Four different styles for enemies. Maybe add a falling state*/
     private enum State {idle, walk, attack, death};
@@ -20,19 +22,20 @@ public class ZombieController : MonoBehaviour
         // this is used in the methods below 
         enemy = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        coll = GetComponent<Collider2D>();
+
         spriteRend = GetComponent<SpriteRenderer>();
 
         /* this defines if the enemy starts moving towards left or towards right.
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindWithTag("Fire").GetComponent<Collider2D>());
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.FindWithTag("Fireball").GetComponent<Collider2D>());      
 
     }
 
     // Update is called once per frame
     void Update() {
+        IgnoreCollisions();        
         // Enemies will only move or idle if they are not attacking or dying
         if (state != State.attack && state != State.death)
             MoveAction();
@@ -42,6 +45,27 @@ public class ZombieController : MonoBehaviour
         ZombieState();
         // changes the sprite animation regarding of it's state
         animator.SetInteger("state", (int)state);
+    }
+
+    private void IgnoreCollisions() {
+        GameObject test;
+
+        test = GameObject.FindWithTag("Fire");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());
+            
+        test = GameObject.FindWithTag("Fireball");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());  
+
+        test = GameObject.FindWithTag("Skeleton");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());      
+
+        test = GameObject.FindWithTag("Zombie");
+        if (test != null)
+            Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());     
+
     }
 
     // Controls the zombie and the skeleton movement (states 0 and 1)
@@ -104,7 +128,9 @@ public class ZombieController : MonoBehaviour
 
     /* Controls the state of the zombie WIP*/
     private void ZombieState() {
-
+        // if (enemy.velocity.x < 1)
+        //     facingLeft = transform.position.x < 0 ? true : false;
+        // else
         if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {
             state = State.walk;      
         }

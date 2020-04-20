@@ -30,23 +30,23 @@ public class FireSpiritController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (state != State.attack)
-            Shoot();
+        timeLeft -= Time.deltaTime;
+        if(timeLeft < 0) 
+            state = State.attack;
+        //if (state != State.attack)
+            //Shoot();
         animator.SetInteger("state", (int)state);
     }
 
     public void Shoot() {
-     
-        timeLeft -= Time.deltaTime;
-        if(timeLeft < 0) {
-            state = State.attack;
-            if (facingLeft) {
-                Instantiate(fireball, new Vector3(transform.position.x + 1, transform.position.y, 0), Quaternion.identity);
-            }
-            else {
-                Instantiate(fireball, new Vector3(transform.position.x - 1, transform.position.y, 0), Quaternion.identity);
-            }
+    
+        if (facingLeft) {
+            Instantiate(fireball, new Vector3(transform.position.x + 1, transform.position.y, 0), Quaternion.identity);
         }
+        else {
+            Instantiate(fireball, new Vector3(transform.position.x - 1, transform.position.y, 0), Quaternion.identity);
+        }
+    
     }
 
     public void ReturnIdle() {
