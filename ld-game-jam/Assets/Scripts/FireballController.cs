@@ -33,7 +33,7 @@ public class FireballController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         Move();
-        if (transform.position.y < 0) {
+        if (transform.position.y < -50f) {
             Destroy(gameObject);
         }
     }

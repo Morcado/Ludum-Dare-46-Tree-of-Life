@@ -8,7 +8,7 @@ public class TreeController : MonoBehaviour {
     [SerializeField] private int hp = 30;
     [SerializeField] private int[] fertilizer = {5, 10, 15};
     private Animator animator;
-    [SerializeField] private Text lifesText = null; // show number in GUI
+    [SerializeField] private Text lifesText; // show number in GUI
 
     private enum Stage {stage1, stage2, stage3};
     private enum State {normal, damaged, death, hit};

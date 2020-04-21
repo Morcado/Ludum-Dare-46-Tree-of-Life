@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
         // Changes animation of the player every time
         animator.SetInteger("state", (int)state);
-        Debug.Log("fertilizer: " + numFertilizer);
 
     }
 

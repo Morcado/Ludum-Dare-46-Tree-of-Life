@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private GameObject zombie;
     [SerializeField] private GameObject fire;
     private float timeLeft = 3.0f;
+    private float timeLeft2 = 2.0f;
     private List<Vector2> puntos = new List<Vector2>();
 
     // Start is called before the first frame update
@@ -37,8 +38,12 @@ public class Spawner : MonoBehaviour {
 
     void SpawnLV1() {
         int chose;
-        if (GameObject.FindWithTag("Bush") == null) {
-            
+        if (GameObject.FindWithTag("Bush") != null) {
+            timeLeft2 -= Time.deltaTime;
+            if(timeLeft2 < 0){
+                timeLeft2 = 7f;
+                Destroy(GameObject.FindWithTag("Bush"));
+            }
             //Instantiate(bush, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
         }
         if (GameObject.FindWithTag("WaterCan") == null) {
@@ -92,30 +97,30 @@ public class Spawner : MonoBehaviour {
                 puntos.Add(new Vector2(13.48f, 6.13f));
             break;
             case "SecondStage": 
-                puntos.Add(new Vector2(-0.01f, 11.93f));
-                puntos.Add(new Vector2(-9.23f, 12.98f));
-                puntos.Add(new Vector2(-9.02f, 12.95f));
-                puntos.Add(new Vector2(10.44f, 8.01f));
-                puntos.Add(new Vector2(-9.1f, 7.86f));
-                puntos.Add(new Vector2(-14.05f, 9.85f));
+                puntos.Add(new Vector2(-13.01f, -6.52f));
+                puntos.Add(new Vector2(-9.23f, 5.98f));
+                puntos.Add(new Vector2(14.02f, -6.55f));
+                puntos.Add(new Vector2(10.44f, -3.54f));
+                puntos.Add(new Vector2(-9.1f, 4.86f));
+                puntos.Add(new Vector2(-14.05f, 1.34f));
                 puntos.Add(new Vector2(-12.84f, 4.96f));
                 puntos.Add(new Vector2(-5.06f, 5.08f));
                 puntos.Add(new Vector2(10.81f, 4.9f));
-                puntos.Add(new Vector2(-13.58f, 1.92f));
-                puntos.Add(new Vector2(11.81f, 1.9f));
+                puntos.Add(new Vector2(-9.58f, -0.73f));
+                puntos.Add(new Vector2(12.81f, -0.73f));
             break;
             case "ThirdStage": 
-                puntos.Add(new Vector2(-1.89f, 14f));
-                puntos.Add(new Vector2(-6.93f, 11.92f));
-                puntos.Add(new Vector2(6.99f, 12.01f));
-                puntos.Add(new Vector2(-11.4f, 8.96f));
-                puntos.Add(new Vector2(11.58f, 8.96f));
-                puntos.Add(new Vector2(-0.04f, 9.98f));
-                puntos.Add(new Vector2(-6.71f, 5.91f));
-                puntos.Add(new Vector2(6.42f, 6f));
-                puntos.Add(new Vector2(-12.05f, 2.02f));
-                puntos.Add(new Vector2(12.05f, 1.98f));
-                puntos.Add(new Vector2(2.22f, 1f));
+                puntos.Add(new Vector2(-0.01f, 3.93f));
+                puntos.Add(new Vector2(10.23f, 2.98f));
+                puntos.Add(new Vector2(-10.02f, 2.2f));
+                puntos.Add(new Vector2(14.3f, 6.72f));
+                puntos.Add(new Vector2(-14.23f, 1.63f));
+                puntos.Add(new Vector2(-14.23f, 6.56f));
+                puntos.Add(new Vector2(-12.84f, 6.56f));
+                puntos.Add(new Vector2(-5.06f, 6.08f));
+                puntos.Add(new Vector2(10.81f, 6.0f));
+                puntos.Add(new Vector2(-13.58f, 2.2f));
+                puntos.Add(new Vector2(11.81f, 2.2f));
             break;
         }
          
