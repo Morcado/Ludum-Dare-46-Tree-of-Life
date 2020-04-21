@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     // Modificable stuff for the player
     [SerializeField] public float moveSpeed = 5f;
     [SerializeField] public float jumpHeight = 10f;
+    [SerializeField] private Text f = null; // show number in GUI
+
     private bool switcher = true;
     private bool facingLeft = false;
     private int numFertilizer = 0;
+    private bool bullet = false;
 
     [SerializeField] private AudioSource jumpSFX;
     [SerializeField] private AudioSource pickUpSFX;
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        f.text = numFertilizer.ToString();
         if (GameObject.FindWithTag("Bush") != null) {
             Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Bush").GetComponent<Collider2D>());
         }
@@ -74,7 +79,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Shoot(){
-        if (Input.GetButtonDown("Fire1")){
+        if (Input.GetButtonDown("Fire1") && bullet){
             if (facingLeft) {
                 Instantiate(beam, new Vector3(transform.position.x - 3, transform.position.y, 0), Quaternion.identity);
 
@@ -85,7 +90,7 @@ public class PlayerController : MonoBehaviour
 
                 beamSFX.Play();
             }
-
+            bullet = false;
         }
     }
     /* This controls the state of the player*/
@@ -146,6 +151,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (collision.tag == "Energy") {
             Destroy(collision.gameObject);
+            bullet = true;
             pickUpSFX.Play();
         }
         else if (collision.tag == "Seed") {

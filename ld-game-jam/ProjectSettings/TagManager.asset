@@ -17,6 +17,7 @@ TagManager:
   - Fire
   - Fireball
   - Beam
+  - Scenes
   layers:
   - Default
   - TransparentFX

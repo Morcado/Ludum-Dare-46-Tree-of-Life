@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class TreeController : MonoBehaviour {
 
     [SerializeField] private int hp = 30;
@@ -61,13 +61,24 @@ public class TreeController : MonoBehaviour {
         }
         else {
             state = State.death;
+            switch (SceneManager.GetActiveScene().name) {
+                case "SampleScene": 
+                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load1();
+                break;
+                case "SecondStage": 
+                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load2();
+                break;
+                case "ThirdStage": 
+                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load3();
+                break;
+            }
         }
     }
 
     /* Called after the player picks up a watering can. Add 5 to life- This can be changed 
     later in game increase difficulty*/
     public void AddLife() {
-        hp += 2;
+        hp += 5;
         
     }
 
@@ -75,14 +86,24 @@ public class TreeController : MonoBehaviour {
         if (numFertilizer < 5) {
             stage = Stage.stage1;
         }
-        else if (numFertilizer == 5) {
+        else if (numFertilizer == 10) {
             stage = Stage.stage2;
         }
         else if (numFertilizer == 15) {
             stage = Stage.stage3;
         }
         else {
-            // win
+            switch (SceneManager.GetActiveScene().name) {
+                case "SampleScene": 
+                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load2();
+                break;
+                case "SecondStage": 
+                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load3();
+                break;
+                case "ThirdStage": 
+                     
+                break;
+            }
         }
         
     }

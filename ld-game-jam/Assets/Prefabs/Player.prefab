@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpHeight: 13
+  f: {fileID: 0}
   jumpSFX: {fileID: 0}
   pickUpSFX: {fileID: 0}
   beamSFX: {fileID: 0}

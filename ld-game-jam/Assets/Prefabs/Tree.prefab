@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f206cc85d064b51418ec7cd511a45be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
+  hp: 16
   fertilizer: 050000000a0000000f000000
   lifesText: {fileID: 0}
 --- !u!50 &1529827640
