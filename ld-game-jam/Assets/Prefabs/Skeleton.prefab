@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6777469517603579067}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,4 +165,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingLeft: 0
   moveSpeed: 1
-  moveSpeedFactor: 0.5
+  moveSpeedFactor: 0.3
+  meleAtackSFX: {fileID: 0}

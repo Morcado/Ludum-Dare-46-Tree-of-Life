@@ -146,3 +146,4 @@ MonoBehaviour:
   moveSpeedFactor: 0.5
   fireball: {fileID: 1248309744486676311, guid: 921db6ad41a9afd4da642ac340e101a2,
     type: 3}
+  fireAtackSFX: {fileID: 0}

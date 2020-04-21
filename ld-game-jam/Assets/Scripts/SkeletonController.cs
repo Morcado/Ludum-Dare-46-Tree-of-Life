@@ -94,7 +94,7 @@ public class SkeletonController : MonoBehaviour
     /* Function called when the animation of attacking it's at half, then it calls
      the tree function to reduce it's life by one. This can be changed in the animation event*/
     public void AttackAction() {
-        GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
+        GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife(1);
 
         meleAtackSFX.Play();
     }
@@ -106,7 +106,7 @@ public class SkeletonController : MonoBehaviour
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
-            Destroy(gameObject);
+            
             state = State.death; // switches to death state
         }
         else if (other.gameObject.tag == "Ground") {
@@ -125,7 +125,6 @@ public class SkeletonController : MonoBehaviour
     /* Controls the state of the zombie WIP*/
     private void SkeletonState() {
         if (state == State.walk) {
-
 
         }
         else if (Mathf.Abs(enemy.velocity.x) > Mathf.Epsilon && state != State.attack) {

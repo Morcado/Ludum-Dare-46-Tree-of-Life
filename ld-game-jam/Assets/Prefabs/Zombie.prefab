@@ -119,6 +119,7 @@ MonoBehaviour:
   facingLeft: 0
   moveSpeed: 5
   moveSpeedFactor: 0.5
+  meleAtackSFX: {fileID: 0}
 --- !u!50 &1900996275183137113
 Rigidbody2D:
   serializedVersion: 4
