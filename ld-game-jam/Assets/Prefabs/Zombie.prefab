@@ -118,8 +118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingLeft: 0
   moveSpeed: 5
-  moveSpeedFactor: 0.5
-  meleAtackSFX: {fileID: 0}
+  moveSpeedFactor: 0.3
+  meleAtackSFX: {fileID: 81741163942013032, guid: 62d944052d69a1942a08bf01b1fe7729,
+    type: 3}
 --- !u!50 &1900996275183137113
 Rigidbody2D:
   serializedVersion: 4

@@ -8,7 +8,7 @@ public class ZombieController : MonoBehaviour
     // Modificable fields for enemies
     [SerializeField] private bool facingLeft = false;
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float moveSpeedFactor = 0.5f;
+    [SerializeField] private float moveSpeedFactor = 0.3f;
 
     [SerializeField] private AudioSource meleAtackSFX;
 
