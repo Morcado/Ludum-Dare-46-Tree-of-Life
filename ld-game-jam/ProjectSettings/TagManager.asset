@@ -18,6 +18,7 @@ TagManager:
   - Fireball
   - Beam
   - Scenes
+  - Lifebar
   layers:
   - Default
   - TransparentFX
