@@ -7,7 +7,7 @@ public class SkeletonController : MonoBehaviour
     // Modificable fields for enemies
     [SerializeField] private bool facingLeft = false;
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private float moveSpeedFactor = 0.5f;
+    [SerializeField] private float moveSpeedFactor = 0.4f;
 
     [SerializeField] private AudioSource meleAtackSFX;
 
@@ -37,16 +37,16 @@ public class SkeletonController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        // changes the sprite animation regarding of it's state
+        animator.SetInteger("state", (int)state);
         IgnoreCollisions();
         // Enemies will only move or idle if they are not attacking or dying
         if (state != State.attack && state != State.death) {
             MoveAction();
         }
 
-        // This checks the zombie state and do some stuff (wip)
+        // This checks the skeleton state and do some stuff (wip)
         SkeletonState();
-        // changes the sprite animation regarding of it's state
-        animator.SetInteger("state", (int)state);
     }
 
     private void IgnoreCollisions() {
@@ -69,11 +69,8 @@ public class SkeletonController : MonoBehaviour
             Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());     
 
     }
-    // Controls the zombie and the skeleton movement (states 0 and 1)
+    // Controls the skeleton and the skeleton movement (states 0 and 1)
     private void MoveAction() {
-        // zombie speed factor, and skeleton speed factor
-        moveSpeedFactor = 0.5f;
-
         Vector3 movement = new Vector3(1, 0f, 0f);
         // changes the speed to move the sprite to the left or to the right depending
         // if he is facing left or right
@@ -85,9 +82,9 @@ public class SkeletonController : MonoBehaviour
             movement.x = -moveSpeedFactor;
             spriteRend.flipX = true;
         }
-        // changes the position of the zombie if it's not idle
+        // changes the position of the skeleton if it's not idle
         if (state != State.idle){
-            transform.position += movement * Time.deltaTime * moveSpeed;
+            transform.position += movement * Time.deltaTime;
         }
     }
 
@@ -106,7 +103,7 @@ public class SkeletonController : MonoBehaviour
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
-            
+            Physics2D.IgnoreCollision(coll, other.gameObject.GetComponent<Collider2D>());
             state = State.death; // switches to death state
         }
         else if (other.gameObject.tag == "Ground") {
@@ -122,7 +119,7 @@ public class SkeletonController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /* Controls the state of the zombie WIP*/
+    /* Controls the state of the skeleton WIP*/
     private void SkeletonState() {
         if (state == State.walk) {
 

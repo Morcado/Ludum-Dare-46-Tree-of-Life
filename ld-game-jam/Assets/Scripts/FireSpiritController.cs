@@ -5,7 +5,6 @@ using UnityEngine;
 public class FireSpiritController : MonoBehaviour
 {
     [SerializeField] private bool facingLeft = false;
-    [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float moveSpeedFactor = 0.5f;
     [SerializeField] private GameObject fireball;
 
@@ -36,13 +35,27 @@ public class FireSpiritController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        animator.SetInteger("state", (int)state);
         IgnoreCollisions();
+        Move();
+
         timeLeft -= Time.deltaTime;
+        // atcacks at certain time
         if(timeLeft < 0) 
             state = State.attack;
-        //if (state != State.attack)
-            //Shoot();
-        animator.SetInteger("state", (int)state);
+    }
+
+    public void Move() {
+        Vector3 movement = new Vector3(1, 0f, 0f);
+        if (facingLeft) {
+            movement.x = moveSpeedFactor;
+            spriteRend.flipX = false;
+        }
+        else {
+            movement.x = -moveSpeedFactor;
+            spriteRend.flipX = true;
+        }
+        transform.position += movement * Time.deltaTime;
     }
 
     private void IgnoreCollisions() {
@@ -80,8 +93,13 @@ public class FireSpiritController : MonoBehaviour
     
     }
     private void OnCollisionEnter2D(Collision2D other) {
-       if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "Player") {
+            Physics2D.IgnoreCollision(coll, other.gameObject.GetComponent<Collider2D>());
             state = State.death; // switches to death state
+        }
+        else if (other.gameObject.tag == "Ground") {
+            // flip firespirit direction when hit wall
+            facingLeft = !facingLeft;
         }
     }
     public void RemoveEnemy() {

@@ -7,7 +7,6 @@ public class ZombieController : MonoBehaviour
 {
     // Modificable fields for enemies
     [SerializeField] private bool facingLeft = false;
-    [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float moveSpeedFactor = 0.3f;
 
     [SerializeField] private AudioSource meleAtackSFX;
@@ -38,6 +37,7 @@ public class ZombieController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        animator.SetInteger("state", (int)state);
         IgnoreCollisions();        
         // Enemies will only move or idle if they are not attacking or dying
         if (state != State.attack && state != State.death)
@@ -47,7 +47,6 @@ public class ZombieController : MonoBehaviour
         // This checks the zombie state and do some stuff (wip)
         ZombieState();
         // changes the sprite animation regarding of it's state
-        animator.SetInteger("state", (int)state);
     }
 
     private void IgnoreCollisions() {
@@ -73,9 +72,6 @@ public class ZombieController : MonoBehaviour
 
     // Controls the zombie and the skeleton movement (states 0 and 1)
     private void MoveAction() {
-        // zombie speed factor, and skeleton speed factor
-        moveSpeedFactor = 0.5f;
-
         Vector3 movement = new Vector3(1, 0f, 0f);
         // changes the speed to move the sprite to the left or to the right depending
         // if he is facing left or right
@@ -89,7 +85,7 @@ public class ZombieController : MonoBehaviour
         }
         // changes the position of the zombie if it's not idle
         if (state != State.idle){
-            transform.position += movement * Time.deltaTime * moveSpeed;
+            transform.position += movement * Time.deltaTime;
         }
     }
 
@@ -107,7 +103,7 @@ public class ZombieController : MonoBehaviour
             state = State.attack; // switches to atack state
         }
         else if (other.gameObject.tag == "Player") {
-
+            Physics2D.IgnoreCollision(coll, other.gameObject.GetComponent<Collider2D>());
             state = State.death; // switches to death state
         }
         else if (other.gameObject.tag == "Ground") {

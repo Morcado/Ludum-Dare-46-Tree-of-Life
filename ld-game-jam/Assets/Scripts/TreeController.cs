@@ -82,7 +82,9 @@ public class TreeController : MonoBehaviour {
     later in game increase difficulty*/
     public void AddLife() {
         hp += 5;
-        
+        if (hp > 25) {
+            hp = 25;
+        }
     }
 
     public void GrowTree(int numFertilizer) {
