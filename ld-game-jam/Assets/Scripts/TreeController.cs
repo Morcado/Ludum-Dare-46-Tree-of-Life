@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class TreeController : MonoBehaviour {
 
-    [SerializeField] private int hp = 30;
-    [SerializeField] private int[] fertilizer = {5, 10, 15};
+    [SerializeField] private int hp = 25;
+    private int[] fertilizer = {5, 10, 15};
     private Animator animator;
-    [SerializeField] private Text lifesText; // show number in GUI
+    private Animator lifeBarAnimator;
 
     private enum Stage {stage1, stage2, stage3};
     private enum State {normal, damaged, death, hit};
@@ -19,15 +18,16 @@ public class TreeController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         animator = GetComponent<Animator>();
+        lifeBarAnimator = GameObject.FindWithTag("Lifebar").GetComponent<Animator>();
         
 
     }
 
     // Update is called once per frame
     void Update() {
-        lifesText.text = hp.ToString(); //updates the life in GUI
         animator.SetInteger("state", (int)state);
         animator.SetInteger("stage", (int)stage);
+        lifeBarAnimator.SetInteger("hp", hp);
 
         if (state != State.hit){
         
@@ -63,12 +63,15 @@ public class TreeController : MonoBehaviour {
             state = State.death;
             switch (SceneManager.GetActiveScene().name) {
                 case "SampleScene": 
+                
                     GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load1();
                 break;
                 case "SecondStage": 
+                
                     GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load2();
                 break;
                 case "ThirdStage": 
+                
                     GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load3();
                 break;
             }
@@ -83,7 +86,7 @@ public class TreeController : MonoBehaviour {
     }
 
     public void GrowTree(int numFertilizer) {
-        if (numFertilizer < 5) {
+        if (numFertilizer <= 5) {
             stage = Stage.stage1;
         }
         else if (numFertilizer == 10) {
@@ -92,19 +95,19 @@ public class TreeController : MonoBehaviour {
         else if (numFertilizer == 15) {
             stage = Stage.stage3;
         }
-        else {
-            switch (SceneManager.GetActiveScene().name) {
-                case "SampleScene": 
-                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load2();
-                break;
-                case "SecondStage": 
-                    GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load3();
-                break;
-                case "ThirdStage": 
-                     
-                break;
-            }
+        else
+        switch (SceneManager.GetActiveScene().name) {
+            case "SampleScene": 
+                GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load2();
+            break;
+            case "SecondStage": 
+                GameObject.FindWithTag("Scenes").GetComponent<Scenes>().load3();
+            break;
+            case "ThirdStage": 
+                    
+            break;
         }
+        
         
     }
 
