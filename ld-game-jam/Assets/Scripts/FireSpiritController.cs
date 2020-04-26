@@ -114,6 +114,16 @@ public class FireSpiritController : MonoBehaviour
             facingLeft = !facingLeft;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Beam")
+        {
+
+            state = State.death; // switches to death state
+        }
+    }
+
     public void RemoveEnemy() {
         Destroy(gameObject);
     }
