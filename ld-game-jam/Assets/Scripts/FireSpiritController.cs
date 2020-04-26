@@ -30,7 +30,9 @@ public class FireSpiritController : MonoBehaviour
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
-       
+
+
+        fireAtackSFX = GameObject.FindWithTag("Fire Attack sfx").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 46669834}
   m_Layer: 0
   m_Name: Enemy Mele Attack SFX
-  m_TagString: Untagged
+  m_TagString: Mele Attack sfx
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4908,7 +4908,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e7972909a0232c94b80b31089d009c85, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.31
   m_Pitch: 1
   Loop: 0
@@ -5086,7 +5086,7 @@ GameObject:
   - component: {fileID: 1030693283}
   m_Layer: 0
   m_Name: Enemy Fire Atack SFX
-  m_TagString: Untagged
+  m_TagString: Fire Attack sfx
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5116,7 +5116,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ad6b1095b455cdd488d7dbfe692ebbfe, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.31
   m_Pitch: 1
   Loop: 0

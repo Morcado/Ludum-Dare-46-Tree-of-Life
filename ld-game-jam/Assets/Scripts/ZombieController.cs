@@ -33,6 +33,8 @@ public class ZombieController : MonoBehaviour
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
 
+
+        meleAtackSFX = GameObject.FindWithTag("Mele Attack sfx").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

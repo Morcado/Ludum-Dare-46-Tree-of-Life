@@ -19,6 +19,8 @@ TagManager:
   - Beam
   - Scenes
   - Lifebar
+  - Fire Attack sfx
+  - Mele Attack sfx
   layers:
   - Default
   - TransparentFX

@@ -15,9 +15,11 @@ public class SkeletonController : MonoBehaviour
     private Rigidbody2D enemy;
     private Collider2D coll;
     private Animator animator;
+
     /* Four different styles for enemies. Maybe add a falling state*/
     private enum State {idle, walk, fall, attack, death};
     private State state = State.idle;
+
     // Start is called before the first frame update
     void Start() {
         // Get the rigidbody, animator and sprite renderer of the current enemy.
@@ -32,7 +34,7 @@ public class SkeletonController : MonoBehaviour
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
 
-
+        meleAtackSFX = GameObject.FindWithTag("Mele Attack sfx").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
