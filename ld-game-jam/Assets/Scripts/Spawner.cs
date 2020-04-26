@@ -92,7 +92,7 @@ public class Spawner : MonoBehaviour {
                 puntos.Add(new Vector2(9.67f, 9.11f));
                 puntos.Add(new Vector2(-0.24f, 8.93f));
                 puntos.Add(new Vector2(-10f, 9f));
-                puntos.Add(new Vector2(-14.43f, 9.04f));
+                puntos.Add(new Vector2(-14.43f, 10.04f));
                 puntos.Add(new Vector2(-6.9f, 5.09f));
                 puntos.Add(new Vector2(13.48f, 6.13f));
             break;
