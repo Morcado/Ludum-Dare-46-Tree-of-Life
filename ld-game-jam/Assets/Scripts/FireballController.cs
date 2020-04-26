@@ -2,58 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballController : MonoBehaviour {
+public class FireballController : MonoBehaviour
+{
 
     private GameObject tree = null;
     private SpriteRenderer spriteRend;
-    [SerializeField] private bool facingLeft = false;
-    private Vector3 initialPos;
-    private Vector3 finalPos;
-    [SerializeField] private float moveSpeedFactor = 0.5f;
-    [SerializeField] private float moveSpeed = 1f;
-    private float xrate = 0.1f;
-    private float yrate = 0.1f;
+    [SerializeField]
+    private bool facingLeft = false;
 
+    float distance_x;
+    float distance_y;
 
-    // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
+        //float 
         spriteRend = GetComponent<SpriteRenderer>();
-        
+
         tree = GameObject.FindWithTag("Tree");
         facingLeft = transform.position.x < 0 ? true : false;
-        
-        Vector3 initialPos = new Vector3(transform.position.x, transform.position.y, 0f);
-        Vector3 finalPos = new Vector3(tree.transform.position.x, tree.transform.position.y, 0f);
+
+        distance_x = Mathf.Abs(tree.transform.position.x - transform.position.x);
+        distance_y = Mathf.Abs(tree.transform.position.y - transform.position.y - 1.0f);
 
         spriteRend.flipX = facingLeft ? false : true;
-        xrate = Mathf.Abs(tree.transform.position.x + 0.001f/ (transform.position.x + 0.001f))/10f;
-        yrate = Mathf.Abs(tree.transform.position.y + 0.001f/ (transform.position.y + 0.001f))/10f;
     }
 
-    // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         Move();
-        if (transform.position.y < -50f) {
+    }
+
+    void Move()
+    {
+        float speed_y = 0.05f;
+
+        if (transform.position.x > tree.transform.position.x)
+            transform.position = new Vector3(transform.position.x - distance_x / (distance_y / speed_y), transform.position.y - speed_y, transform.position.z);
+        else if (transform.position.x < tree.transform.position.x)
+            transform.position = new Vector3(transform.position.x + distance_x / (distance_y / speed_y), transform.position.y - speed_y, transform.position.z);
+        else
+            transform.position = new Vector3(transform.position.x, transform.position.y - speed_y, transform.position.z);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Tree")
+        {
+            GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife(2);
             Destroy(gameObject);
         }
-    }
-
-    void Move() {
-        //if (transform.position.x < tree.transform.position.x && transform.position.y < tree.transform.position.y)
-        if(facingLeft)
-            transform.position = new Vector3(transform.position.x + 0.05f, transform.position.y - 0.075f, transform.position.z);
-        else
-            transform.position = new Vector3(transform.position.x - 0.05f, transform.position.y - 0.075f, transform.position.z);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        // if (other.gameObject.tag == "Tree") {
-        //     GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
-        // }
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        // GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife();
-
     }
 }
