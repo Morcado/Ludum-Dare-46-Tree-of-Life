@@ -114,6 +114,16 @@ public class SkeletonController : MonoBehaviour
         }
     }
 
+    //So the enemy can die from the beam
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Beam")
+        {
+
+            state = State.death; // switches to death state
+        }
+    }
+
     /* This function it's called after the dying animation it's played. Removes the enemy from the game*/
     public void RemoveEnemy() {
         Destroy(gameObject);

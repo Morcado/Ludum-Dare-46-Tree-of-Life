@@ -45,17 +45,29 @@ public class FireSpiritController : MonoBehaviour
             state = State.attack;
     }
 
-    public void Move() {
+    public void Move()
+    {
         Vector3 movement = new Vector3(1, 0f, 0f);
-        if (facingLeft) {
+        if (facingLeft)
+        {
             movement.x = moveSpeedFactor;
             spriteRend.flipX = false;
         }
-        else {
+        else
+        {
             movement.x = -moveSpeedFactor;
             spriteRend.flipX = true;
         }
         transform.position += movement * Time.deltaTime;
+
+        if (transform.position.x > 14.0f)
+        {
+            facingLeft = false;
+        }
+        else if (transform.position.x < -14.0f)
+        {
+            facingLeft = true;
+        }
     }
 
     private void IgnoreCollisions() {
