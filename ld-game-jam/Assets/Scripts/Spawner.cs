@@ -11,9 +11,12 @@ public class Spawner : MonoBehaviour {
     [SerializeField] private GameObject skeleton;
     [SerializeField] private GameObject zombie;
     [SerializeField] private GameObject fire;
-    private float timeLeft = 3.0f;
-    private float timeLeft2 = 2.0f;
+    private float fertilizerSpawnTime = 3.0f;
+    private float bushSpawnTime = 2.0f;
+    private float fireSpawnTime = 3.0f;
     private List<Vector2> puntos = new List<Vector2>();
+    [SerializeField] private GameObject enemies;
+    [SerializeField] private GameObject collectibles;
 
     // Start is called before the first frame update
     void Start() {
@@ -21,7 +24,7 @@ public class Spawner : MonoBehaviour {
         AddPoints();
     }
 
-    public void SpawnMinitrees(bool left) {
+    public void SpawnBush(bool left) {
         if (left) {
             Instantiate(bush, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
         }
@@ -32,52 +35,66 @@ public class Spawner : MonoBehaviour {
 
     // Update is called once per frame
     void Update(){
-
         SpawnLV1();
     }
 
     void SpawnLV1() {
         int chose;
         if (GameObject.FindWithTag("Bush") != null) {
-            timeLeft2 -= Time.deltaTime;
-            if(timeLeft2 < 0){
-                timeLeft2 = 7f;
+            bushSpawnTime -= Time.deltaTime;
+            if(bushSpawnTime < 0){
+                bushSpawnTime = 7f;
                 Destroy(GameObject.FindWithTag("Bush"));
             }
             //Instantiate(bush, new Vector3(0.855f, 1.505f, 0), Quaternion.identity);
         }
         if (GameObject.FindWithTag("WaterCan") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(watercan, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var collectible = Instantiate(watercan, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            collectible.transform.parent = collectibles.transform;
         }
 
         if (GameObject.FindWithTag("Fertilizer") == null) {
-            timeLeft -= Time.deltaTime;
-            if(timeLeft < 0) {
+            fertilizerSpawnTime -= Time.deltaTime;
+            if(fertilizerSpawnTime < 0) {
                 chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-
-                Instantiate(fertilizer, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+                var collectible = Instantiate(fertilizer, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+                collectible.transform.parent = collectibles.transform;
+                chose = Mathf.RoundToInt(Random.Range(0f, 10f));
+                var collectible2 = Instantiate(fertilizer, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+                collectible2.transform.parent = collectibles.transform;
             }
         }
         if (GameObject.FindWithTag("Seed") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(seed, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var collectible = Instantiate(seed, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            collectible.transform.parent = collectibles.transform;
+            chose = Mathf.RoundToInt(Random.Range(0f, 10f));
+            var collectible2 = Instantiate(seed, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            collectible2.transform.parent = collectibles.transform;
         }
         if (GameObject.FindWithTag("Energy") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(energy, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var collectible = Instantiate(energy, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            collectible.transform.parent = collectibles.transform;
+            chose = Mathf.RoundToInt(Random.Range(0f, 10f));
+            var collectible2 = Instantiate(energy, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            collectible2.transform.parent = collectibles.transform;
         }
         if (GameObject.FindWithTag("Skeleton") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(skeleton, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var enemy = Instantiate(skeleton, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            enemy.transform.parent = enemies.transform;
         }
         if (GameObject.FindWithTag("Zombie") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(zombie, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var enemy = Instantiate(zombie, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            enemy.transform.parent = enemies.transform;
         }
         if (GameObject.FindWithTag("Fire") == null) {
             chose = Mathf.RoundToInt(Random.Range(0f, 10f));
-            Instantiate(fire, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            var enemy = Instantiate(fire, new Vector3(puntos[chose].x, puntos[chose].y, 0), Quaternion.identity);
+            enemy.transform.parent = enemies.transform;
         }
     }
 
@@ -96,18 +113,18 @@ public class Spawner : MonoBehaviour {
                 puntos.Add(new Vector2(-6.9f, 5.09f));
                 puntos.Add(new Vector2(13.48f, 6.13f));
             break;
-            case "SecondStage": 
-                puntos.Add(new Vector2(-13.01f, -6.52f));
-                puntos.Add(new Vector2(-9.23f, 5.98f));
-                puntos.Add(new Vector2(14.02f, -6.55f));
-                puntos.Add(new Vector2(10.44f, -3.54f));
-                puntos.Add(new Vector2(-9.1f, 4.86f));
-                puntos.Add(new Vector2(-14.05f, 1.34f));
+            case "SecondStage":        
+                puntos.Add(new Vector2(-0.01f, 11.93f));
+                puntos.Add(new Vector2(-9.23f, 12.98f));
+                puntos.Add(new Vector2(-9.02f, 12.95f));
+                puntos.Add(new Vector2(10.44f, 8.01f));
+                puntos.Add(new Vector2(-9.1f, 7.86f));
+                puntos.Add(new Vector2(-14.05f, 9.85f));
                 puntos.Add(new Vector2(-12.84f, 4.96f));
                 puntos.Add(new Vector2(-5.06f, 5.08f));
                 puntos.Add(new Vector2(10.81f, 4.9f));
-                puntos.Add(new Vector2(-9.58f, -0.73f));
-                puntos.Add(new Vector2(12.81f, -0.73f));
+                puntos.Add(new Vector2(-13.58f, 1.92f));
+                puntos.Add(new Vector2(11.81f, 1.93f));
             break;
             case "ThirdStage": 
                 puntos.Add(new Vector2(-0.01f, 3.93f));

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2074803150149921432}
   - component: {fileID: 2074803150149921437}
   - component: {fileID: 1948315677}
+  - component: {fileID: 721264353059386567}
   m_Layer: 0
   m_Name: FireSpirit
   m_TagString: Fire
@@ -147,3 +148,24 @@ MonoBehaviour:
     type: 3}
   fireAtackSFX: {fileID: 4241746254198404587, guid: 9815e5e457e2e4646a1b6f58e0fba754,
     type: 3}
+--- !u!50 &721264353059386567
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074803150149921433}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6

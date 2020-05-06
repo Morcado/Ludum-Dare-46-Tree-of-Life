@@ -21,6 +21,8 @@ TagManager:
   - Lifebar
   - Fire Attack sfx
   - Mele Attack sfx
+  - Explosion
+  - Stage Cntr
   layers:
   - Default
   - TransparentFX

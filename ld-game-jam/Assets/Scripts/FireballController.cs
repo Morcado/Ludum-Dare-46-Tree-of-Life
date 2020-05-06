@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireballController : MonoBehaviour
-{
+public class FireballController : MonoBehaviour {
 
     private GameObject tree = null;
     private SpriteRenderer spriteRend;
-    [SerializeField]
-    private bool facingLeft = false;
+    [SerializeField] private bool facingLeft = false;
 
     float distance_x;
     float distance_y;
 
-    void Start()
-    {
+    void Start() {
         //float 
         spriteRend = GetComponent<SpriteRenderer>();
 
@@ -24,16 +21,14 @@ public class FireballController : MonoBehaviour
         distance_x = Mathf.Abs(tree.transform.position.x - transform.position.x);
         distance_y = Mathf.Abs(tree.transform.position.y - transform.position.y - 1.0f);
 
-        spriteRend.flipX = facingLeft ? false : true;
+        spriteRend.flipX = facingLeft ? false : true;     
     }
 
-    void Update()
-    {
+    void Update() {
         Move();
     }
 
-    void Move()
-    {
+    void Move()  {
         float speed_y = 0.05f;
 
         if (transform.position.x > tree.transform.position.x)
@@ -44,10 +39,8 @@ public class FireballController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y - speed_y, transform.position.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Tree")
-        {
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Tree") {
             GameObject.FindWithTag("Tree").GetComponent<TreeController>().ReduceLife(2);
             Destroy(gameObject);
         }

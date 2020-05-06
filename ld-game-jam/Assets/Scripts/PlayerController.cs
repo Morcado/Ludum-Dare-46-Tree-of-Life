@@ -6,14 +6,18 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     // Modificable stuff for the player
-    [SerializeField] public float moveSpeed = 5f;
-    [SerializeField] public float jumpHeight = 10f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpHeight = 10f;
     [SerializeField] private Text f = null; // show number in GUI
+
+    [SerializeField] private Sprite power_up_ui_on;
+    [SerializeField] private Sprite power_up_ui_off;
+    [SerializeField] private Image power_up_ui;
 
     private bool switcher = true;
     private bool facingLeft = false;
-    private int numFertilizer = 0;
-    private bool bullet = false;
+    private int numFertilizer;
+    private int bullet = 0;
 
     [SerializeField] private AudioSource jumpSFX;
     [SerializeField] private AudioSource pickUpSFX;
@@ -36,9 +40,18 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
+        power_up_ui.sprite = power_up_ui_off;
         
         // Ingnore collision between player and tree.
         Physics2D.IgnoreCollision(coll, GameObject.FindWithTag("Tree").GetComponent<Collider2D>());       
+
+        if (GameObject.FindWithTag("Stage Cntr").GetComponent<stage_cntr>().Get_stage() == 0) {
+            numFertilizer = 0;
+        } else if (GameObject.FindWithTag("Stage Cntr").GetComponent<stage_cntr>().Get_stage() == 1) {
+            numFertilizer = 5;
+        } else if (GameObject.FindWithTag("Stage Cntr").GetComponent<stage_cntr>().Get_stage() == 2) {
+            numFertilizer = 10;
+        }
     }
 
     // Update is called once per frame
@@ -69,8 +82,7 @@ public class PlayerController : MonoBehaviour
         if (horizontalInput < 0) {
             facingLeft = true;
             spriteRend.flipX = true;
-        }
-        else if (horizontalInput > 0) {
+        } else if (horizontalInput > 0) {
             facingLeft = false;
             spriteRend.flipX = false;
         }
@@ -78,18 +90,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Shoot(){
-        if (Input.GetButtonDown("Fire1") && bullet){
+        if (Input.GetButtonDown("Fire1") && bullet > 0){
             if (facingLeft) {
                 Instantiate(beam, new Vector3(transform.position.x - 3, transform.position.y, 0), Quaternion.identity);
-
-                beamSFX.Play();
-            }
-            else {
+            } else {
                 Instantiate(beam, new Vector3(transform.position.x + 3, transform.position.y, 0), Quaternion.identity);
-
-                beamSFX.Play();
             }
-            bullet = false;
+            beamSFX.Play();
+            power_up_ui.sprite = power_up_ui_off;
+            bullet--;
         }
     }
     /* This controls the state of the player*/
@@ -111,17 +120,14 @@ public class PlayerController : MonoBehaviour
         This is ignored when the player it's jumping or falling*/
         else if (Mathf.Abs(player.velocity.x) > Mathf.Epsilon) {
             state = State.run;
-        }
-        else {
+        } else {
             state = State.idle;
         }
         // Debug.Log("state:" + (int)state);
     }
 
     /* This is called every time to check if the player is jumping. it checks on the jump button.*/
-    public void Jump()
-    {
-        
+    public void Jump() {       
         if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(Foreground)){
             //player.AddForce(new Vector2(0f, jumpHeight), ForceMode2D.Impulse); // another way?
             player.velocity = new Vector2(player.velocity.x, jumpHeight);
@@ -131,32 +137,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag == "Fertilizer") {
             Destroy(collision.gameObject);
             numFertilizer++;
             GameObject.FindWithTag("Tree").GetComponent<TreeController>().GrowTree(numFertilizer);
             pickUpSFX.Play();
-        }
-        else if (collision.tag == "WaterCan") {
-            GameObject.FindWithTag("Tree").GetComponent<TreeController>().AddLife();
+        } else if (collision.tag == "WaterCan") {
+            GameObject.FindWithTag("Tree").GetComponent<TreeController>().Heal();
             Destroy(collision.gameObject);
             pickUpSFX.Play();
-        }
-        else if (collision.tag == "Energy") {
+        } else if (collision.tag == "Energy") {
             Destroy(collision.gameObject);
-            bullet = true;
+            bullet++;
             pickUpSFX.Play();
-        }
-        else if (collision.tag == "Seed") {
+            power_up_ui.sprite = power_up_ui_on;
+        } else if (collision.tag == "Seed") {
             switcher = !switcher;
             Destroy(collision.gameObject);
-            GameObject.FindWithTag("Spawner").GetComponent<Spawner>().SpawnMinitrees(true);
+            GameObject.FindWithTag("Spawner").GetComponent<Spawner>().SpawnBush(true);
             pickUpSFX.Play();
         }
     }

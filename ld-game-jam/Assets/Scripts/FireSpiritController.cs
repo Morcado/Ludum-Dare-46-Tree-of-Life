@@ -25,12 +25,10 @@ public class FireSpiritController : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
 
-
         /* this defines if the enemy starts moving towards left or towards right.
          it checks the center of the screen. This has to be changed to check the 
          tree x position */
         facingLeft = transform.position.x < 0 ? true : false;
-
 
         fireAtackSFX = GameObject.FindWithTag("Fire Attack sfx").GetComponent<AudioSource>();
     }
@@ -47,27 +45,20 @@ public class FireSpiritController : MonoBehaviour
             state = State.attack;
     }
 
-    public void Move()
-    {
+    public void Move() {
         Vector3 movement = new Vector3(1, 0f, 0f);
-        if (facingLeft)
-        {
+        if (facingLeft) {
             movement.x = moveSpeedFactor;
             spriteRend.flipX = false;
-        }
-        else
-        {
+        } else {
             movement.x = -moveSpeedFactor;
             spriteRend.flipX = true;
         }
         transform.position += movement * Time.deltaTime;
 
-        if (transform.position.x > 14.0f)
-        {
+        if (transform.position.x > 14.0f) {
             facingLeft = false;
-        }
-        else if (transform.position.x < -14.0f)
-        {
+        } else if (transform.position.x < -14.0f) {
             facingLeft = true;
         }
     }
@@ -90,38 +81,29 @@ public class FireSpiritController : MonoBehaviour
         test = GameObject.FindWithTag("Zombie");
         if (test != null)
             Physics2D.IgnoreCollision(coll, test.GetComponent<Collider2D>());     
-
     }
 
-    public void Shoot() {
-    
+    public void Shoot() {   
         if (facingLeft) {
             Instantiate(fireball, new Vector3(transform.position.x + 1, transform.position.y, 0), Quaternion.identity);
-
             fireAtackSFX.Play();
-        }
-        else {
+        } else {
             Instantiate(fireball, new Vector3(transform.position.x - 1, transform.position.y, 0), Quaternion.identity);
             fireAtackSFX.Play();
         }
-    
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if (other.gameObject.tag == "Player") {
             Physics2D.IgnoreCollision(coll, other.gameObject.GetComponent<Collider2D>());
             state = State.death; // switches to death state
-        }
-        else if (other.gameObject.tag == "Ground") {
+        } else if (other.gameObject.tag == "Ground") {
             // flip firespirit direction when hit wall
             facingLeft = !facingLeft;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Beam")
-        {
-
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Beam")  {
             state = State.death; // switches to death state
         }
     }
